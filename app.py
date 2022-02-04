@@ -7,7 +7,7 @@ import requests
 
 app = Flask(__name__)
 
-APIKEY = 'C227WD9W3LUVKVV9'
+APIKEY = ''
 
 BASEURL = 'https://www.alphavantage.co/query'
 APISTR = 'apikey=' + APIKEY
@@ -20,7 +20,7 @@ def stock_splat():
     """ Handle the default / URL for GET
 
     Build response from the stock quote service based on the example URL:
-    https://www.alphavantage.co/query?apikey=C227WD9W3LUVKVV9&function=TIME_SERIES_DAILY&symbol=MSFT
+    https://www.alphavantage.co/query?apikey=<API key>&function=TIME_SERIES_DAILY&symbol=MSFT
 
     :return: JSON response converted from processed dict
     """
