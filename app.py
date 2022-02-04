@@ -55,7 +55,7 @@ def stock_splat():
     # sum the close prices and get the average
     for price in closelst:
         avg += float(price)
-    avg = avg/float(days)
+    avg = avg / float(days)
     # print("{:.4}".format(avg))
 
     # Add the close average to the data
@@ -67,4 +67,3 @@ def stock_splat():
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=8080)
-
