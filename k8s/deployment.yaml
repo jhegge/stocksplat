@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stocksplat-deployment
+  labels:
+    app: stocksplat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stocksplat
+  template:
+    metadata:
+      labels:
+        app: stocksplat
+    spec:
+      containers:
+        - name: stocksplat
+          image: johnathanhegge/stocksplat:1
+          ports:
+            - containerPort: 8080
+              name: flask
+          imagePullPolicy: Always
+          envFrom:
+          - secretRef:
+              name: apikey-secret
+          env:
+            - name: SYMBOL
+              valueFrom:
+                configMapKeyRef:
+                  name: stocksplat-config
+                  key: symbol
+            - name: NDAYS
+              valueFrom:
+                configMapKeyRef:
+                  name: stocksplat-config
+                  key: ndays

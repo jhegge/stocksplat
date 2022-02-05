@@ -7,10 +7,7 @@ import requests
 
 app = Flask(__name__)
 
-APIKEY = ''
-
 BASEURL = 'https://www.alphavantage.co/query'
-APISTR = 'apikey=' + APIKEY
 FUNCSTR = 'function=TIME_SERIES_DAILY'
 
 
@@ -28,10 +25,15 @@ def stock_splat():
     # get incoming params, set some defaults
     symbol = os.getenv("SYMBOL", 'ABC')
     symstr = 'symbol=' + symbol
-    days = os.getenv("NDAYS", 3)
+    days = os.getenv("NDAYS", 3)  # incoming env var is a string?
+    if days in str:
+        days = int(days)
+
+    apikey = os.getenv('APIKEY')
+    apistr = 'apikey=' + apikey
 
     # call the external API to get the info, capture for returning
-    req_url = BASEURL + '?' + APISTR + '&' + FUNCSTR + '&' + symstr
+    req_url = BASEURL + '?' + apistr + '&' + FUNCSTR + '&' + symstr
     resp = requests.get(req_url)
 
     # convert the JSON response to a dict for processing

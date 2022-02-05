@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: stocksplat-config
+  labels:
+    app: stocksplat
+data:
+  symbol: "MSFT"
+  ndays: "6"
