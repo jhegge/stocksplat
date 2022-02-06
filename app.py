@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import os
+import base64
 
 from flask import Flask
 import requests
@@ -26,10 +27,13 @@ def stock_splat():
     symbol = os.getenv("SYMBOL", 'ABC')
     symstr = 'symbol=' + symbol
     days = os.getenv("NDAYS", 3)  # incoming env var is a string?
-    if days in str:
+    if isinstance(days, str):
         days = int(days)
 
-    apikey = os.getenv('APIKEY')
+    apikey64 = os.getenv('APIKEY')
+    base64_bytes = apikey64.encode('ascii')
+    key_bytes = base64.b64decode(base64_bytes)
+    apikey = key_bytes.decode('ascii')
     apistr = 'apikey=' + apikey
 
     # call the external API to get the info, capture for returning

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: stocksplat
-          image: johnathanhegge/stocksplat:1
+          image: johnathanhegge/stocksplat:2
           ports:
             - containerPort: 8080
               name: flask
