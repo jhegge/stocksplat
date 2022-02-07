@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: stocksplat-deployment
+  namespace: default
   labels:
     app: stocksplat
 spec:

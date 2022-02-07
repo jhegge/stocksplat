@@ -26,14 +26,11 @@ def stock_splat():
     # get incoming params, set some defaults
     symbol = os.getenv("SYMBOL", 'ABC')
     symstr = 'symbol=' + symbol
-    days = os.getenv("NDAYS", 3)  # incoming env var is a string?
+    days = os.getenv("NDAYS", 3)
     if isinstance(days, str):
         days = int(days)
 
-    apikey64 = os.getenv('APIKEY')
-    base64_bytes = apikey64.encode('ascii')
-    key_bytes = base64.b64decode(base64_bytes)
-    apikey = key_bytes.decode('ascii')
+    apikey = os.getenv('APIKEY')
     apistr = 'apikey=' + apikey
 
     # call the external API to get the info, capture for returning
@@ -42,6 +39,7 @@ def stock_splat():
 
     # convert the JSON response to a dict for processing
     resp_dict = json.loads(resp.text)
+    print(resp_dict['Meta Data'])
 
     # make an iterator for the data items
     itr = iter(resp_dict['Time Series (Daily)'].items())
